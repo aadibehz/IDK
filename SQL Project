@@ -1,0 +1,31 @@
+with data as (select e.employee_id, e.first_name, e.last_name, e.salary, e.department_id, e.job_id, d.department_name
+from hr.employees e
+join hr.departments d
+on e.department_id = d.department_id)
+
+select max(salary), department_id, department_name, round(avg(salary), 2)
+from data
+group by department_id, department_name;
+
+select * from hr.employees
+where department_id = 70;
+---------------------------------------------------------------------------------------------------------------------------------
+WITH PRODUCTS_SOLD AS (select  
+    PROD_ID, 
+    to_char(TIME_ID, 'YYYY-MM') AS MONTH, 
+    SUM("AMOUNT_SOLD") AS "TOTAL_SOLD" 
+from SH."SALES" 
+GROUP BY to_char(TIME_ID, 'YYYY-MM'), PROD_ID 
+ 
+ORDER BY TOTAL_SOLD DESC 
+) 
+ 
+SELECT MAX(TOTAL_SOLD), PROD_ID, MONTH FROM PRODUCTS_SOLD 
+WHERE rownum <= 48
+GROUP BY MONTH, PROD_ID
+ORDER BY MAX(MONTH), MAX(TOTAL_SOLD) DESC;
+select * from sh.promotions
+WHERE PROMO_SUBCATEGORY_ID = 29
+ORDER BY PROMO_BEGIN_DATE;
+-----------------------------------------------------------------------------------------------------------------------------------
+LOOM presentation: https://www.loom.com/share/da4481fffe9a42ec8d4425df5d9d1606
